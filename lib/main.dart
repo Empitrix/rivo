@@ -1,20 +1,35 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:rivo/config/manager.dart';
+import 'package:rivo/views/home_page.dart';
 
-void main() {
-  runApp(const MainApp());
+
+void main(){
+	runApp(const RivoApp());
 }
 
-class MainApp extends StatelessWidget {
-  const MainApp({super.key});
+class RivoApp extends StatelessWidget {
+	const RivoApp({super.key});
 
-  @override
-  Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: Scaffold(
-        body: Center(
-          child: Text('Hello World!'),
-        ),
-      ),
-    );
-  }
+	@override
+	Widget build(BuildContext context) {
+		return MultiProvider(
+			providers: [
+				ChangeNotifierProvider(
+					create: (_) => Manager(context),
+					builder: (BuildContext context, Widget? child){
+						return MaterialApp(
+							title: "Rivo",
+							debugShowCheckedModeBanner: false,
+							themeMode: Provider.of<Manager>(context).themeMode,
+							darkTheme: Provider.of<Manager>(context).darkTheme(),
+							theme: Provider.of<Manager>(context).lightTheme(),
+							home: const HomePage(),
+						);
+					},
+				)
+			]
+		);
+	}
 }
+
