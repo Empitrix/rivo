@@ -1,3 +1,4 @@
+import 'package:rivo/components/swipable/swipable.dart';
 import 'package:flutter/material.dart';
 import 'package:rivo/utils/utils.dart';
 import 'package:rivo/views/drawer.dart';
@@ -45,7 +46,16 @@ class _HomePageState extends State<HomePage> {
 					),
 					title: const Text("Something"),
 				),
-				body: const Placeholder(),
+				body: Swipable(
+					child: Container(
+						color: Colors.transparent,
+						width: 250,
+						height: 250,
+						child: const Card(
+							child: Center(child: Text("Swipe Me around")),
+						),
+					),
+				),
 			)
 		);
 	}
